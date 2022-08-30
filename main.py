@@ -45,7 +45,7 @@ def main():
                         else:
                             if n == len(rows) and enc==False:
                                 print("sem processo") 
-                        o.write(cpf.strip()+',q='+numQ+',s='+numS+'n')
+                        o.write(cpf.strip()+',q='+numQ+',s='+numS+'\n')
             except:
                 o.write(cpf.strip()+",so 1 proc\n")
                 print("so 1 proc") 
