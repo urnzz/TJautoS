@@ -19,6 +19,8 @@ def main():
                 WebDriverWait(driver, 5).until(EC.presence_of_element_located((By.XPATH, '//*[@id="listagemDeProcessos"]')))
                 t=driver.find_element(By.XPATH, '//*[@id="listagemDeProcessos"]')
                 lists = t.find_elements(By.TAG_NAME, "ul")
+                numQ=''
+                numS=''
                 for list in lists:
                     rows = list.find_elements(By.TAG_NAME, 'li')
                     n=-1
@@ -45,7 +47,7 @@ def main():
                         else:
                             if n == len(rows) and enc==False:
                                 print("sem processo") 
-                    o.write(cpf.strip()+',q='+numQ+',s='+numS+'\n')
+                o.write(cpf.strip()+',q='+numQ+',s='+numS+'\n')
             except:
                 o.write(cpf.strip()+",so 1 proc\n")
                 print("so 1 proc") 
