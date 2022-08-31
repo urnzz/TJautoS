@@ -47,10 +47,29 @@ def main():
                         else:
                             if n == len(rows) and enc==False:
                                 print("sem processo") 
-                o.write(cpf.strip()+',q='+numQ+',s='+numS+'\n')
+                o.write(cpf.strip()+','+numQ+','+numS+'\n')
             except:
-                o.write(cpf.strip()+",so 1 proc\n")
-                print("so 1 proc") 
+                WebDriverWait(driver, 5).until(EC.presence_of_element_located((By.XPATH, '/html/body/div[1]/div[2]/div/div[1]/div/span[1]')))
+                num = list.find_element(By.XPATH, '/html/body/div[1]/div[2]/div/div[1]/div/span[1]').text
+                numQ=''
+                numS=''
+                enc=False
+                if '2005' in num:
+                    print('encontrado quinquenio')
+                    enc=True
+                    numS=num
+                elif '2011' in num:
+                    print('encontrado sexta-parte')
+                    enc=True
+                    numS=num
+                elif '2019' in num or '2020' in num or '2021' in num or '2022' in num:
+                    print('encontrado quinquenio')
+                    enc=True
+                    numQ=num
+                else:
+                    print("sem processo")
+                if enc==True:
+                    o.write(cpf.strip()+','+numQ+','+numS+'\n')
         except:
             o.write(cpf.strip()+",erro\n")
             print('erro encontrado, pulando cpf: '+cpf)
