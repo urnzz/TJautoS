@@ -9,7 +9,7 @@ def main():
     cpfs = f.readlines()
     o = open('output.txt', 'w+')
     options = uc.ChromeOptions()
-    #options.headless=True
+    options.headless=True
     driver = uc.Chrome(options=options)
     for cpf in cpfs:
         try:
@@ -32,15 +32,12 @@ def main():
                         n+=1
                         if "Cumprimento de sentença" in str(row.find_element(By.CLASS_NAME, "classeProcesso").text):
                             if '2019' in str(row.find_element(By.CLASS_NAME, "linkProcesso").text) or '2020' in str(row.find_element(By.CLASS_NAME, "linkProcesso").text) or '2021' in str(row.find_element(By.CLASS_NAME, "linkProcesso").text) or '2022' in str(row.find_element(By.CLASS_NAME, "linkProcesso").text):
-                                print('encontrado quinquenio')
                                 enc=True
                                 numQ=row.find_element(By.CLASS_NAME, "linkProcesso").text
                             elif '2011' in str(row.find_element(By.CLASS_NAME, "linkProcesso").text):
-                                print('encontrado sexta-parte')
                                 enc=True
                                 numS=row.find_element(By.CLASS_NAME, "linkProcesso").text
                             elif '2005' in str(row.find_element(By.CLASS_NAME, "linkProcesso").text):
-                                print('encontrado quinquenio')
                                 enc=True
                                 numQ=row.find_element(By.CLASS_NAME, "linkProcesso").text
                 o.write(cpf.strip()+','+numQ+','+numS+'\n')
