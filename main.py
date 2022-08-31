@@ -25,8 +25,6 @@ def main():
                 for list in lists:
                     rows = list.find_elements(By.TAG_NAME, 'li')
                     n=-1
-                    numQ=''
-                    numS=''
                     for row in rows:
                         n+=1
                         if "Cumprimento de sentença" in str(row.find_element(By.CLASS_NAME, "classeProcesso").text):
