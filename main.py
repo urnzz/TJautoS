@@ -13,6 +13,8 @@ def main():
     driver = uc.Chrome(options=options)
     for cpf in cpfs:
         try:
+            numQ=''
+            numS=''
             print("pesquisando no TJ "+cpf.strip())
             url='https://esaj.tjsp.jus.br/cpopg/search.do?conversationId=&cbPesquisa=DOCPARTE&dadosConsulta.valorConsulta={}&cdForo=-1'
             driver.get(url.format(cpf))
@@ -20,8 +22,6 @@ def main():
                 WebDriverWait(driver, 5).until(EC.presence_of_element_located((By.XPATH, '//*[@id="listagemDeProcessos"]')))
                 t=driver.find_element(By.XPATH, '//*[@id="listagemDeProcessos"]')
                 lists = t.find_elements(By.TAG_NAME, "ul")
-                numQ=''
-                numS=''
                 for list in lists:
                     rows = list.find_elements(By.TAG_NAME, 'li')
                     n=-1
