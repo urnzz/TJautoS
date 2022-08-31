@@ -25,20 +25,16 @@ def main():
                 for list in lists:
                     rows = list.find_elements(By.TAG_NAME, 'li')
                     n=-1
-                    enc=False
                     numQ=''
                     numS=''
                     for row in rows:
                         n+=1
                         if "Cumprimento de sentença" in str(row.find_element(By.CLASS_NAME, "classeProcesso").text):
                             if '2019' in str(row.find_element(By.CLASS_NAME, "linkProcesso").text) or '2020' in str(row.find_element(By.CLASS_NAME, "linkProcesso").text) or '2021' in str(row.find_element(By.CLASS_NAME, "linkProcesso").text) or '2022' in str(row.find_element(By.CLASS_NAME, "linkProcesso").text):
-                                enc=True
                                 numQ=row.find_element(By.CLASS_NAME, "linkProcesso").text
                             elif '2011' in str(row.find_element(By.CLASS_NAME, "linkProcesso").text):
-                                enc=True
                                 numS=row.find_element(By.CLASS_NAME, "linkProcesso").text
                             elif '2005' in str(row.find_element(By.CLASS_NAME, "linkProcesso").text):
-                                enc=True
                                 numQ=row.find_element(By.CLASS_NAME, "linkProcesso").text
                 o.write(cpf.strip()+','+numQ+','+numS+'\n')
             except:
